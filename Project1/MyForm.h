@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #define N 500 // Число отрезков для вычисления плотности распределения вероятности 
-#define M 100000L // Число экспериментов
+//#define M 100000L // Число экспериментов
 //float sl_vel(float a, float b);
 float f[N];
 
@@ -45,6 +45,7 @@ namespace Project1 {
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ textBox2;
 	protected:
 
 	private:
@@ -66,6 +67,7 @@ namespace Project1 {
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -77,6 +79,7 @@ namespace Project1 {
 			this->chart1->Legends->Add(legend1);
 			this->chart1->Location = System::Drawing::Point(29, 2);
 			this->chart1->Name = L"chart1";
+			this->chart1->Palette = System::Windows::Forms::DataVisualization::Charting::ChartColorPalette::None;
 			series1->ChartArea = L"ChartArea1";
 			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
 			series1->Legend = L"Legend1";
@@ -101,14 +104,22 @@ namespace Project1 {
 			// 
 			this->textBox1->Location = System::Drawing::Point(72, 377);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(181, 20);
+			this->textBox1->Size = System::Drawing::Size(484, 20);
 			this->textBox1->TabIndex = 2;
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(72, 408);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(484, 20);
+			this->textBox2->TabIndex = 3;
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(725, 458);
+			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->chart1);
@@ -124,15 +135,17 @@ namespace Project1 {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 
+		long long M = 100000L; // Число экспериментов
+		if (textBox2->Text != "") { M = Convert::ToInt32(textBox2->Text); }
 		srand(time(0));
 		for (int i = 0; i <= N; i++)
 		{
 			f[i] = 0;
 
 		}
-
+		// TODO: вывести 2ю плотность распределения
 		long m; // Индекс для номера эксперимента
-		float x, a = 1.5, b = 3.5, d;
+		float x, a = -2, b = 7, d;
 		int n;
 		float ff = 0.0;
 		d = (b - a) / N; //величина отрезка случайной величины х
