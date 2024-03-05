@@ -143,7 +143,7 @@ namespace Project1 {
 		}
 
 		long m; // Индекс для номера эксперимента
-		float x, a = 0, b = 4, d;
+		float x, a = 0, b = 7, d;
 		int n;
 		float ff = 0.0;
 		d = (b - a) / N; //величина отрезка случайной величины х
@@ -171,14 +171,19 @@ namespace Project1 {
 			   for (int i = 0; i < MX; i++) {
 				   u1 = (float)rand() / RAND_MAX;
 				   u2 = (float)rand() / RAND_MAX;
-				   x = u1 * 4; // диапазон значений [0, 4)
-				   if (x < 2) {
-					   if (u2 <= 0.25) break;
+				   x = u1 * 7; // диапазон значений [0, 7)
+
+				   if (x < 3) {
+					   if (u2 <= 0.1) break;
+				   }
+				   else if (x >= 3 && x < 5) {
+					   if (u2 == 0) break; // вероятность равна 0, поэтому мы не можем сгенерировать значение в этом диапазоне
 				   }
 				   else {
-					   if (u2 <= (4 - x) / 4) break;
+					   if (u2 <= -0.35 * x + 2.45) break;
 				   }
 			   }
+
 			   return x;
 		   }
 
