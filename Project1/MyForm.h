@@ -143,14 +143,13 @@ namespace Project1 {
 		}
 
 		long m; // Индекс для номера эксперимента
-		float x, a = 0, b = 4, d;
-		int n;
+		int n; float x, a = -5, b = 5, d;
 		float ff = 0.0;
 		d = (b - a) / N; //величина отрезка случайной величины х
 
 		for (m = 0; m < MX; m++) // Цикл по числу экспериментов
 		{
-			x = sl_vel();
+			x = gauss_test();
 			//textBox2->Text += x + "; \r\n";
 			n = (x - a) / (b - a) * N;
 			f[n] = f[n] + 1.;
@@ -166,19 +165,17 @@ namespace Project1 {
 		}
 
 	}
-		   float sl_vel() {
-			   float u1, u2, x;
-			   for (int i = 0; i < MX; i++) {
-				   u1 = (float)rand() / RAND_MAX;
-				   u2 = (float)rand() / RAND_MAX;
-				   x = u1 * 4; // диапазон значений [0, 4)
-				   if (x < 2) {
-					   if (u2 <= 0.25) break;
-				   }
-				   else {
-					   if (u2 <= (4 - x) / 4) break;
-				   }
-			   }
+		   float gauss_test(void)
+
+		   {
+			   float x;
+			   int i, N_cycle = 10;
+			   x = 0.0;
+			   for (i = 0; i < N_cycle; i++)
+			x = x + random(30000) / 30000.0;
+			   x = x - 0.5 * N_cycle;
+			   x = x / sqrt(N_cycle / 12.);
+
 			   return x;
 		   }
 
